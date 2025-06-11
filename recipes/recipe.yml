@@ -3,7 +3,7 @@
 # image will be published to ghcr.io/<user>/<name>
 name: bazzite-fork
 # description will be included in the image's metadata
-description: This is my personal OS image.
+description: Personal tweaks on top of bazzite-dx
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/bazzite-dx
@@ -28,16 +28,22 @@ modules:
     #   - firefox
     #   - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
 
-  # - type: default-flatpaks
-  #   notify: true # Send notification after install/uninstall is finished (true/false)
-  #   system:
-  #     # If no repo information is specified, Flathub will be used by default
-  #     install:
-  #       - org.mozilla.firefox
-  #       - org.gnome.Loupe
-  #     remove:
-  #       - org.gnome.eog
-  #   user: {} # Also add Flathub user repo, but no user packages
+  - type: default-flatpaks
+    notify: true # Send notification after install/uninstall is finished (true/false)
+    system:
+      # If no repo information is specified, Flathub will be used by default
+      install:
+        - app.zen_browser.zen
+      remove:
+        - org.mozilla.firefox
+    user: {} # Also add Flathub user repo, but no user packages
+
+  - type: script
+    snippets:
+      # apply firefox tweaks to zen
+      - "sed 's/org.mozilla.firefox/app.zen_browser.zen/g' /usr/libexec/bazite-flatpak-manager" 
+      # install lix
+      - "curl -sSf -L https://install.lix.systems/lix | sh -s -- install"
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
 
