@@ -31,6 +31,23 @@ modules:
       - kernel-modules-core
       - kernel-modules-extra
       - kernel-devel
+      - kmod-framework-laptop
+      - kmod-kvmfr
+      - kmod-openrazer
+      - kmod-v4l2loopback
+      - kmod-wl 
+      - kmod-xone
+      - kmod-ayaneo-platform
+      - kmod-ayn-platform
+      - kmod-bmi260
+      - kmod-evdi
+      - kmod-gcadapter_oc
+      - kmod-gpd-fan
+      - kmod-nct6687d
+      - kmod-ryzen-smu
+      - kmod-system76
+      - kmod-system76-io
+      - kmod-zenergy
     install:
       - https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-devel-matched-6.13.7-107.bazzite.fc42.x86_64.rpm
       - https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-devel-6.13.7-107.bazzite.fc42.x86_64.rpm
@@ -39,6 +56,28 @@ modules:
       - https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-modules-6.13.7-107.bazzite.fc42.x86_64.rpm
       - https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-modules-core-6.13.7-107.bazzite.fc42.x86_64.rpm
       - https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-modules-extra-6.13.7-107.bazzite.fc42.x86_64.rpm
+
+  # reinstall bazzite akmods
+  - type: akmods
+    base: bazzite
+    install:
+      - framework-laptop
+      - kvmfr
+      - openrazer
+      - v4l2loopback
+      - wl
+      - xone
+      - ayaneo-platform
+      - ayn-platform
+      - bmi260
+      - evdi
+      - gcadapter_oc
+      - gpd-fan
+      - nct6687d
+      - ryzen-smu
+      - system76
+      - system76-io
+      - zenergy
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
