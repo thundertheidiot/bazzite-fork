@@ -40,7 +40,7 @@ modules:
       - kmod-ayaneo-platform
       - kmod-ayn-platform
       - kmod-bmi260
-      - kmod-evdi
+      # - kmod-evdi
       - kmod-gcadapter_oc
       - kmod-gpd-fan
       - kmod-nct6687d
@@ -70,7 +70,7 @@ modules:
       - ayaneo-platform
       - ayn-platform
       - bmi260
-      - evdi
+      # - evdi
       - gcadapter_oc
       - gpd-fan
       - nct6687d
