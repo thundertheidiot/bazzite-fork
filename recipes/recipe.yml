@@ -21,64 +21,68 @@ modules:
   - type: rpm-ostree
     install:
       - ckb-next 
+  
+  #rocm is broken on the latest kernel
+  - type: rpm-ostree
+    remove:
+      - kmod-framework-laptop
+      - framework-laptop-kmod-common
+      - kmod-kvmfr
+      - kvmfr
+      - kmod-openrazer
+      - openrazer-kmod-common
+      - kmod-v4l2loopback
+      - v4l2loopback
+      - akmod-v4l2loopback # ???
+      - kmod-wl 
+      - kmod-xone
+      - xone-kmod-common
+      - kmod-ayaneo-platform
+      - ayaneo-platform
+      - kmod-ayn-platform
+      - ayn-platform
+      - kmod-bmi260
+      - bmi260
+      - kmod-gcadapter_oc
+      - gcadapter_oc
+      - kmod-gpd-fan
+      - gpd-fan
+      - kmod-nct6687d
+      - nct6687d
+      - kmod-ryzen-smu
+      - ryzen-smu
+      - kmod-zenergy
+      - zenergy
+      - kmod-vhba
+      - vhba
+      - broadcom-wl
 
-  # rocm is broken on the latest kernel
-  # - type: rpm-ostree
-  #   remove:
-  #     - kmod-framework-laptop
-  #     - framework-laptop-kmod-common
-  #     - kmod-kvmfr
-  #     - kvmfr
-  #     - kmod-openrazer
-  #     - openrazer-kmod-common
-  #     - kmod-v4l2loopback
-  #     - v4l2loopback
-  #     - akmod-v4l2loopback # ???
-  #     - kmod-wl 
-  #     - kmod-xone
-  #     - xone-kmod-common
-  #     - kmod-ayaneo-platform
-  #     - ayaneo-platform
-  #     - kmod-ayn-platform
-  #     - ayn-platform
-  #     - kmod-bmi260
-  #     - bmi260
-  #     - kmod-gcadapter_oc
-  #     - gcadapter_oc
-  #     - kmod-gpd-fan
-  #     - gpd-fan
-  #     - kmod-nct6687d
-  #     - nct6687d
-  #     - kmod-ryzen-smu
-  #     - ryzen-smu
-  #     - kmod-zenergy
-  #     - zenergy
-  #     - kmod-vhba
-  #     - vhba
-  #     - broadcom-wl
-
-  # - type: script
-  #   snippets:
-  #     - >
-  #       rpm-ostree override replace
-  #       https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-devel-matched-6.13.7-107.bazzite.fc42.x86_64.rpm
-  #       https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-devel-6.13.7-107.bazzite.fc42.x86_64.rpm
-  #       https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-6.13.7-107.bazzite.fc42.x86_64.rpm
-  #       https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-core-6.13.7-107.bazzite.fc42.x86_64.rpm
-  #       https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-modules-6.13.7-107.bazzite.fc42.x86_64.rpm
-  #       https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-modules-core-6.13.7-107.bazzite.fc42.x86_64.rpm
-  #       https://github.com/bazzite-org/kernel-bazzite/releases/download/6.13.7-107/kernel-modules-extra-6.13.7-107.bazzite.fc42.x86_64.rpm
-
-  # - type: containerfile
-  #   snippets:
-  #     - COPY --from=ghcr.io/ublue-os/akmods:bazzite-42-6.13.9-103.bazzite.fc42.x86_64 / /tmp/akmods
-  #     - RUN find /tmp/akmods
-  #     - >
-  #       RUN rpm-ostree override replace
-  #       /tmp/akmods/kernel-rpms/*.rpm
-  #     # - >
-  #     #   RUN dnf install -y /tmp/akmods/rpms/kmods/*.rpm /tmp/akmods/rpms/ublue-os/*.rpm
-
+  - type: containerfile
+    snippets:
+      - COPY --from=ghcr.io/ublue-os/akmods-extra:bazzite-41-6.13.7-108.bazzite.fc41.x86_64 / /tmp/akmods
+      # - COPY --from=ghcr.io/ublue-os/akmods:main-41 / /tmp/akmods
+      - RUN find /tmp/akmods
+      - >
+        RUN rpm-ostree override replace
+        /tmp/akmods/kernel-rpms/*.rpm
+      # - >
+      #   RUN dnf install -y 
+      #   framework-laptop-kmod-common
+      #   kvmfr
+      #   openrazer-kmod-common
+      #   v4l2loopback
+      #   xone-kmod-common
+      #   ayaneo-platform
+      #   ayn-platform
+      #   bmi260
+      #   gcadapter_oc
+      #   gpd-fan
+      #   nct6687d
+      #   ryzen-smu
+      #   zenergy
+      #   vhba
+      #   broadcom-wl
+      #   /tmp/akmods/rpms/kmods/*.rpm
 
   - type: default-flatpaks
     notify: true # Send notification after install/uninstall is finished (true/false)
