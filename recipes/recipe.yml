@@ -13,16 +13,16 @@ image-version: stable
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-  # - type: files
-  #   files:
-  #     - source: system
-  #       destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+  - type: files
+    files:
+      - source: system
+        destination: /
 
   - type: rpm-ostree
     install:
       - ckb-next 
   
-  #rocm is broken on the latest kernel
+  # rocm is broken on the latest kernel
   - type: rpm-ostree
     remove:
       - kmod-framework-laptop
@@ -60,11 +60,11 @@ modules:
   - type: containerfile
     snippets:
       - COPY --from=ghcr.io/ublue-os/akmods-extra:bazzite-41-6.13.7-108.bazzite.fc41.x86_64 / /tmp/akmods
-      # - COPY --from=ghcr.io/ublue-os/akmods:main-41 / /tmp/akmods
       - RUN find /tmp/akmods
       - >
         RUN rpm-ostree override replace
         /tmp/akmods/kernel-rpms/*.rpm
+      # TODO figure this out
       # - >
       #   RUN dnf install -y 
       #   framework-laptop-kmod-common
@@ -99,7 +99,9 @@ modules:
       # apply firefox tweaks to zen
       - "sed -i 's/org.mozilla.firefox/app.zen_browser.zen/g' /usr/libexec/bazzite-flatpak-manager" 
       # install lix
-      # - "curl -sSf -L https://install.lix.systems/lix | sh -s -- install"
+      - "curl -sSf -L https://install.lix.systems/lix | sh -s -- install"
+    scripts:
+      - enable-nix-mount.sh
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
 
