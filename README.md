@@ -1,8 +1,15 @@
 # bazzite-fork &nbsp; [![bluebuild build badge](https://github.com/thundertheidiot/bazzite-fork/actions/workflows/build.yml/badge.svg)](https://github.com/thundertheidiot/bazzite-fork/actions/workflows/build.yml)
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+This is a personal custom image based on [bazzite-dx](https://dev.bazzite.gg) with some minor tweaks. Not really recommended for general usage for now, just make your own.
 
-After setup, it is recommended you update this README to describe your custom image.
+Included stuff:
+- ckb-next for my corsair mouse
+- swap firefox flatpak for zen
+- downgrade kernel to 6.13.7-108 from bazzite-41 to make rocm work
+  i did not figure out how to install the extra kernel modules of bazzite yet
+- [lesbian nix](https://lix.systems)
+
+Rest of the default bluebuild readme below
 
 ## Installation
 
