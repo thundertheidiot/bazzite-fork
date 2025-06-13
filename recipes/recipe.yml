@@ -105,6 +105,7 @@ modules:
       # install lix
       - "curl -sSf -L https://install.lix.systems/lix | sh -s -- install linux --no-start-daemon --no-confirm"
       # systemd does not support cross partition symlinks apparently
+      - rm /etc/systemd/system/nix-daemon.service /etc/systemd/system/nix-daemon.socket
       - cp -v /nix/var/nix/profiles/default/lib/systemd/system/* /etc/systemd/system/
       - ln -sf /etc/systemd/system/nix-daemon.socket /etc/systemd/system/sockets.target.wants/nix-daemon.socket
 
