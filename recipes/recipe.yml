@@ -95,19 +95,24 @@ modules:
     user: {} # Also add Flathub user repo, but no user packages
 
   - type: script
-    scripts:
-      - setup-nix-directory.sh
-
-  - type: script
     snippets:
       # apply firefox tweaks to zen
       - "sed -i 's/org.mozilla.firefox/app.zen_browser.zen/g' /usr/libexec/bazzite-flatpak-manager" 
-      # install lix
-      - "curl -sSf -L https://install.lix.systems/lix | sh -s -- install linux --no-start-daemon --extra-conf \"allowed-users = \" --no-confirm"
-      # systemd does not support cross partition symlinks apparently
-      - rm /etc/systemd/system/nix-daemon.service /etc/systemd/system/nix-daemon.socket
-      - cp -v /nix/var/nix/profiles/default/lib/systemd/system/* /etc/systemd/system/
-      - ln -sf /etc/systemd/system/nix-daemon.socket /etc/systemd/system/sockets.target.wants/nix-daemon.socket
+
+  # - type: script
+  #   scripts:
+  #     - setup-nix-directory.sh
+
+  # - type: script
+  #   snippets:
+  #     # install lix
+  #     - "curl -sSf -L https://install.lix.systems/lix | sh -s -- install linux --no-start-daemon --extra-conf \"allowed-users = @wheel\" --no-confirm"
+  #     # systemd does not support cross partition symlinks apparently
+  #     - rm /etc/systemd/system/nix-daemon.service /etc/systemd/system/nix-daemon.socket
+  #     - cp -v /nix/var/nix/profiles/default/lib/systemd/system/* /etc/systemd/system/
+  #     - ln -sf /etc/systemd/system/nix-daemon.socket /etc/systemd/system/sockets.target.wants/nix-daemon.socket
+  #     # nixbld group
+  #     - groupadd nixbld
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
 

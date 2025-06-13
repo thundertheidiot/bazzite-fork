@@ -7,7 +7,7 @@ Included stuff:
 - swap firefox flatpak for zen
 - downgrade kernel to 6.13.7-108 from bazzite-41 to make rocm work
   i did not figure out how to install the extra kernel modules of bazzite yet
-- [lesbian nix](https://lix.systems)
+<!-- - [lesbian nix](https://lix.systems) -->
 
 Rest of the default bluebuild readme below
 
