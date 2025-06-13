@@ -103,7 +103,7 @@ modules:
       # apply firefox tweaks to zen
       - "sed -i 's/org.mozilla.firefox/app.zen_browser.zen/g' /usr/libexec/bazzite-flatpak-manager" 
       # install lix
-      - "curl -sSf -L https://install.lix.systems/lix | sh -s -- install linux --init none --no-confirm"
+      - "curl -sSf -L https://install.lix.systems/lix | sh -s -- install linux --no-start-daemon --no-confirm"
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
 
