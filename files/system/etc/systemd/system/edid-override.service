@@ -1,0 +1,13 @@
+[Unit]
+Description=Apply EDID overrides at boot
+After=multi-user.target
+Wants=multi-user.target
+ConditionPathExists=/etc/edids
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/apply-edid-overrides
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

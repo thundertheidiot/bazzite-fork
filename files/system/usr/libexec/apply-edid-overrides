@@ -1,0 +1,13 @@
+#!/esr/bin/env bash
+
+EDID_DIR="/etc/edids"
+
+for i in $(find /sys/kernel/debug/dri -name edid_override); do
+    connector=$(basename $(dirname "$i"))
+
+    edid_file="$EDID_DIR/$connector.bin"
+    if [ -f "$edid_file" ]; then
+        echo "Applying EDID for $connector"
+        cat "$edid_file" > "$i"
+    fi
+done

@@ -97,7 +97,8 @@ modules:
   - type: script
     snippets:
       # apply firefox tweaks to zen
-      - "sed -i 's/org.mozilla.firefox/app.zen_browser.zen/g' /usr/libexec/bazzite-flatpak-manager" 
+      - "sed -i 's/org.mozilla.firefox/app.zen_browser.zen/g' /usr/libexec/bazzite-flatpak-manager"
+      - "systemctl enable edid-override.service"
 
   # - type: script
   #   scripts:
