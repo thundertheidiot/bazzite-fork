@@ -1,4 +1,4 @@
-#!/esr/bin/env bash
+#!/usr/bin/env bash
 
 EDID_DIR="/etc/edids"
 
