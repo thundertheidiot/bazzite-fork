@@ -1,0 +1,13 @@
+[Unit]
+Description=Start kanata if /etc/kanata.kbd exists
+After=multi-user.target
+Wants=multi-user.target
+ConditionPathExists=/etc/kanata.kbd
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/kanata --cfg /etc/kanata.kbd
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
