@@ -85,9 +85,8 @@ modules:
       #   /tmp/akmods/rpms/kmods/*.rpm
 
   - type: default-flatpaks
-    notify: true # Send notification after install/uninstall is finished (true/false)
+    notify: true
     system:
-      # If no repo information is specified, Flathub will be used by default
       install:
         - app.zen_browser.zen
       remove:

@@ -1,0 +1,28 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+name: aurora
+description: Personal tweaks on top of aurora-dx
+
+base-image: ghcr.io/ublue-os/aurora-dx
+image-version: stable
+
+modules:
+  - type: files
+    files:
+      - source: system
+        destination: /
+
+  - type: default-flatpaks
+    notify: true
+    system:
+      install:
+        - app.zen_browser.zen
+      remove:
+        - org.mozilla.firefox
+    user: {} # Also add Flathub user repo, but no user packages
+
+  - type: script
+    snippets:
+      # apply firefox tweaks to zen
+      - "sed -i 's/org.mozilla.firefox/app.zen_browser.zen/g' /usr/libexec/ublue-flatpak-manager"
+      - "systemctl enable edid-override.service"
