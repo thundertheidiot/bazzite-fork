@@ -5,7 +5,7 @@
 Description=Mount /nix
 DefaultDependencies=no
 After=var.mount ostree-remount.service nix-dir-move.service
-BindsTo=var.mount nix-dir-move.service
+BindsTo=var.mount
 
 [Mount]
 What=/var/nix
