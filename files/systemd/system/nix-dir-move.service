@@ -4,6 +4,7 @@
 [Unit]
 Description=Move nix dir
 ConditionPathExists=/etc/.tmp-nix
+ConditionPathExists=!/var/nix
 After=var.mount etc.mount
 BindsTo=var.mount etc.mount
 

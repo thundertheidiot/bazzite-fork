@@ -17,6 +17,12 @@ After=nix.mount
 BindsTo=nix.mount
 EOF
 
+# Find the correct nix daemon at start time, don't hard code the path to the installation that was made at build time
+mkdir -p /etc/systemd/system/nix-daemon.service.d
+cat <<EOF > /etc/systemd/system/nix-daemon.service.d/override.conf
+[Service]
+ExecStart=$(find /nix/store -name nix-daemon | grep '/bin/nix-daemon$' | head -n 1) nix-daemon --daemon
+EOF
 
 # setup nix directory
 mv /nix /etc/.tmp-nix
