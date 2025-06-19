@@ -1,0 +1,11 @@
+modules:
+  - type: default-flatpaks
+    notify: true
+    system:
+      install:
+        - app.zen_browser.zen
+      remove:
+        - org.mozilla.firefox
+  - type: script
+    scripts:
+      - zen-browser.sh

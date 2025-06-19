@@ -13,10 +13,7 @@ image-version: stable
 # module configuration, executed in order
 # you can include multiple instances of the same module
 modules:
-  - type: files
-    files:
-      - source: system
-        destination: /
+  - from-file: common/files.yml
 
   - type: rpm-ostree
     install:
@@ -84,36 +81,10 @@ modules:
       #   broadcom-wl
       #   /tmp/akmods/rpms/kmods/*.rpm
 
-  - type: default-flatpaks
-    notify: true
-    system:
-      install:
-        - app.zen_browser.zen
-      remove:
-        - org.mozilla.firefox
-    user: {} # Also add Flathub user repo, but no user packages
-
-  - type: script
-    snippets:
-      # apply firefox tweaks to zen
-      - "sed -i 's/org.mozilla.firefox/app.zen_browser.zen/g' /usr/libexec/bazzite-flatpak-manager"
-      - "systemctl enable edid-override.service"
-
-  - type: script
-    scripts:
-      - install-lix.sh
+  - from-file: common/files.yml
+  - from-file: common/zen.yml
+  - from-file: common/scripts.yml
   - from-file: common/services.yml
-
-  # - type: script
-  #   snippets:
-  #     # install lix
-  #     - "curl -sSf -L https://install.lix.systems/lix | sh -s -- install linux --no-start-daemon --extra-conf \"allowed-users = @wheel\" --no-confirm"
-  #     # systemd does not support cross partition symlinks apparently
-  #     - rm /etc/systemd/system/nix-daemon.service /etc/systemd/system/nix-daemon.socket
-  #     - cp -v /nix/var/nix/profiles/default/lib/systemd/system/* /etc/systemd/system/
-  #     - ln -sf /etc/systemd/system/nix-daemon.socket /etc/systemd/system/sockets.target.wants/nix-daemon.socket
-  #     # nixbld group
-  #     - groupadd nixbld
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
 

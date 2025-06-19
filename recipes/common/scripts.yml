@@ -1,0 +1,4 @@
+type: script
+scripts:
+  - install-lix.sh
+  - install-kanata.sh

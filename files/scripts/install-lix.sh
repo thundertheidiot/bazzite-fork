@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 # lix installer
 curl -sSf -L https://install.lix.systems/lix | sh -s -- install linux --no-start-daemon --no-confirm

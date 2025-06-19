@@ -7,25 +7,9 @@ base-image: ghcr.io/ublue-os/aurora-dx
 image-version: stable
 
 modules:
-  - type: files
-    files:
-      - source: system
-        destination: /
+  - from-file: common/files.yml
+  - from-file: common/zen.yml
+  - from-file: common/scripts.yml
+  - from-file: common/services.yml
 
-  - type: default-flatpaks
-    notify: true
-    system:
-      install:
-        - app.zen_browser.zen
-      remove:
-        - org.mozilla.firefox
-    user: {} # Also add Flathub user repo, but no user packages
-
-  - type: script
-    snippets:
-      # apply firefox tweaks to zen
-      - "sed -i 's/org.mozilla.firefox/app.zen_browser.zen/g' /usr/libexec/ublue-flatpak-manager"
-      - "wget https://github.com/jtroo/kanata/releases/download/v1.8.1/kanata -O /usr/bin/kanata"
-      - chmod +x /usr/bin/kanata
-      - "systemctl enable edid-override.service"
-      - "systemctl enable kanata.service"
+  - type: signing
