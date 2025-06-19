@@ -25,7 +25,7 @@ cat <<EOF > /etc/systemd/system/nix-daemon.service.d/override.conf
 ExecStart=$(find /nix/store -name nix-daemon | grep '/bin/nix-daemon$' | head -n 1) nix-daemon --daemon
 EOF
 
-chown -R wheel /nix
+chown -R :wheel /nix
 chmod -R g+rwx /nix
 
 # setup nix directory
