@@ -1,0 +1,16 @@
+# Thanks to bourbonos
+# https://github.com/bourbonOS/bourbonOS/blob/live/files/systemd/system/nix-dir-move.service
+
+[Unit]
+Description=Move nix dir
+ConditionPathExists=/etc/.tmp-nix
+After=var.mount etc.mount
+BindsTo=var.mount etc.mount
+
+[Service]
+Type=oneshot
+ExecStart=mv /etc/.tmp-nix /var/nix
+ExecStartPost=/usr/bin/systemctl disable nix-dir-move.service
+
+[Install]
+WantedBy=multi-user.target

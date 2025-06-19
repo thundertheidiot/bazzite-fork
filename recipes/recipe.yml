@@ -99,9 +99,10 @@ modules:
       - "sed -i 's/org.mozilla.firefox/app.zen_browser.zen/g' /usr/libexec/bazzite-flatpak-manager"
       - "systemctl enable edid-override.service"
 
-  # - type: script
-  #   scripts:
-  #     - setup-nix-directory.sh
+  - type: script
+    scripts:
+      - install-lix.sh
+  - from-file: common/services.yml
 
   # - type: script
   #   snippets:

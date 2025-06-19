@@ -1,0 +1,7 @@
+type: systemd
+system:
+  enabled:
+    - edid-override.service
+    - kanata.service
+    - nix-dir-move.service
+    - semanage-nix.service
