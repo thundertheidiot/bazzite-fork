@@ -18,11 +18,15 @@ BindsTo=nix.mount
 EOF
 
 # Find the correct nix daemon at start time, don't hard code the path to the installation that was made at build time
+# This system is stupid in theory, but i think it will work quite well in practice, since the nix-daemon updates probably aren't massive
 mkdir -p /etc/systemd/system/nix-daemon.service.d
 cat <<EOF > /etc/systemd/system/nix-daemon.service.d/override.conf
 [Service]
 ExecStart=$(find /nix/store -name nix-daemon | grep '/bin/nix-daemon$' | head -n 1) nix-daemon --daemon
 EOF
+
+chown -R wheel /nix
+chmod -R g+rwx /nix
 
 # setup nix directory
 mv /nix /etc/.tmp-nix
