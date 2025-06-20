@@ -11,6 +11,6 @@ modules:
   - from-file: common/zen.yml
   - from-file: common/scripts.yml
   - from-file: common/services.yml
-  # - from-file: common/lix.yml
+  - from-file: common/lix.yml
 
   - type: signing

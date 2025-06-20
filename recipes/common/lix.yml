@@ -1,9 +1,10 @@
 modules:
   - type: script
     scripts:
-     - install-lix.sh
+     # - install-lix.sh
+     - nix.sh
   - type: systemd
     system:
       enabled:
-        - nix-dir-move.service
+        # - nix-dir-move.service
         - semanage-nix.service
